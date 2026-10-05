@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    android:versionCode="202610"
+    android:versionName="2.6.9-removed ads and supported landscape display, dark theme-hlfei cracked-1"
+    android:compileSdkVersion="29"
+    android:compileSdkVersionCodename="10"
+    package="com.lqw.giftoolbox"
+    platformBuildVersionCode="29"
+    platformBuildVersionName="10">
+
+    <!-- 最低 SDK 为 Android 5，目标 SDK 为 Android 10 -->
+    <uses-sdk
+        android:minSdkVersion="21"
+        android:targetSdkVersion="29" />
+
+    <!-- 拥有完全的网络访问权限，用于“网络动图下载”功能 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- 防止手机休眠，用于提升此应用处理文件的稳定性 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- 修改或删除您共享存储空间中的内容，用于保存此应用处理好的文件以及“网络动图下载”功能下载下来的 GIF 图片 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- 读取您共享存储空间中的内容，用于选择、预览文件 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!-- 运行前台服务 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <application
+        android:theme="@style/AppThemeWelcome"
+        android:label="@string/app_name"
+        android:icon="@mipmap/about_logo"
+        android:name=".MainApplication"
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
+        android:appCategory="productivity"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:requestLegacyExternalStorage="true">
+        <meta-data
+            android:name="android.notch_support"
+            android:value="true" />
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.34" />
+        <meta-data
+            android:name="notch.config"
+            android:value="portrait|landscape" />
+
+        <!-- 主界面 -->
+        <activity
+            android:name=".activity.main.AppMainActivity"
+            android:launchMode="singleTask"
+            android:configChanges="layoutDirection|smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden" />
+
+        <!-- 开屏页 -->
+        <activity
+            android:name=".activity.LauncherActivity"
+            android:configChanges="layoutDirection|smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden">
+
+            <!-- 在主屏幕上显示此应用，允许直接打开 -->
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.MAIN" />
+                <category
+                    android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.detail.EditDetailActivity"
+            android:configChanges="layoutDirection|screenSize|orientation|navigation|keyboardHidden"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+
+        <!-- “使用问题反馈”页 -->
+        <activity
+            android:name=".activity.setting.FeedbackActivity"
+            android:configChanges="layoutDirection|smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden" />
+
+        <!-- “设置”页 -->
+        <activity
+            android:name=".activity.setting.SettingActivity"
+            android:configChanges="layoutDirection|smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden" />
+
+        <!-- “网络动图下载”页 -->
+        <activity
+            android:name=".activity.netgif.NetGifHotActivity"
+            android:configChanges="layoutDirection|smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden" />
+
+        <!-- “网络动图详情”页 -->
+        <activity
+            android:name=".activity.netgif.NetGifDetailActivity"
+            android:launchMode="singleTask"
+            android:configChanges="layoutDirection|smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden" />
+
+        <!-- “关于”页 -->
+        <activity
+            android:name=".activity.setting.AboutActivity"
+            android:configChanges="layoutDirection|smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden" />
+
+        <service
+            android:name=".foreground.Video2GifForegroundService">
+            <intent-filter android:priority="1000">
+                <action android:name=".myservice" />
+            </intent-filter>
+        </service>
+        <provider
+            android:name=".GenericFileProvider"
+            android:authorities="com.lqw.giftoolbox.my.package.name.provider"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <!-- “其它的应用”页 -->
+        <activity
+            android:name="com.lqw.apprecommend.AppRecommendActivity"
+            android:configChanges="layoutDirection|smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden" />
+
+        <!-- 《用户协议》《隐私政策》和《免责声明》页 -->
+        <activity
+            android:name="com.lqw.common.activity.PrivacyActivity"
+            android:configChanges="layoutDirection|smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden" />
+
+        <!-- “图片选择”页 -->
+        <activity
+            android:theme="@style/vw_FilePickerTheme"
+            android:name="com.vincent.filepicker.activity.ImagePickActivity"
+            android:configChanges="layoutDirection|smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden" />
+
+        <!-- “视频选择”页 -->
+        <activity
+            android:theme="@style/vw_FilePickerTheme"
+            android:name="com.vincent.filepicker.activity.VideoPickActivity"
+            android:configChanges="layoutDirection|smallestScreenSize|screenSize|screenLayout|orientation|navigation|keyboardHidden" />
+
+        <!-- 用于打开设备上的 DocumentsUI (文件) 应用 -->
+        <activity
+            android:theme="@style/nl_MainActivityTheme"
+            android:name="nl.marc_apps.files.MainActivity" />
+
+        <!-- 无法打开 DocumentsUI (文件) 时显示错误信息 -->
+        <activity
+            android:theme="@style/ErrorActivityTheme"
+            android:name="nl.marc_apps.files.ErrorActivity" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.lqw.giftoolbox.provider"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+        <activity
+            android:theme="@style/EasyPermissions.Transparent"
+            android:label=""
+            android:name="pub.devrel.easypermissions.AppSettingsDialogHolderActivity" />
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+    </application>
+</manifest>
